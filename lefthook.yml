@@ -1,12 +1,5 @@
-pre-push:
-  parallel: true
-  commands:
-    tests:
-      run: flutter test
-    static_code_analysis:
-      run: flutter analyze
-
 pre-commit:
+  parallel: true
   commands:
     lint_code:
       glob: '*.dart'
@@ -14,3 +7,7 @@ pre-commit:
     format_code:
       glob: '*.dart'
       run: flutter format ./lib && git add .
+    tests:
+      run: flutter test
+    static_code_analysis:
+      run: flutter analyze
