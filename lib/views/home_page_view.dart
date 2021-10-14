@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
     return const Material(
       child: Center(
         child: Text('Press Me'),
-      )
+      ),
     );
   }
 }

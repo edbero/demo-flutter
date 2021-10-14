@@ -23,8 +23,6 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context);
-
     final title = Padding(
       padding: const EdgeInsets.only(top: 64),
       child: Text(
