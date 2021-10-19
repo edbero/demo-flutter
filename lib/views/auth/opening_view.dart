@@ -43,7 +43,10 @@ class Opening extends StatelessWidget {
           "Register",
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+            fontSize: 20,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         onPressed: () {
           Navigator.of(context).pushNamed(AppRoutes.register);
@@ -70,7 +73,11 @@ class Opening extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(padding: const EdgeInsets.only(bottom: 64), child: logo),
+            Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 64,
+                ),
+                child: logo),
             buttons
           ],
         ),

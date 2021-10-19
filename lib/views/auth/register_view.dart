@@ -201,7 +201,9 @@ class _RegisterState extends State<Register> {
                 logo,
                 fields,
                 Padding(
-                    padding: const EdgeInsets.only(bottom: 50), child: bottom),
+                  padding: const EdgeInsets.only(bottom: 50),
+                  child: bottom,
+                ),
                 // bottom,
               ],
             ),

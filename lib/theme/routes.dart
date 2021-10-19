@@ -14,7 +14,7 @@ class AppRoutes {
     return {
       login: (context) => const Login(),
       register: (context) => const Register(),
-      productList: (context) => const ProductList()
+      productList: (context) => const ProductList(),
     };
   }
 }
