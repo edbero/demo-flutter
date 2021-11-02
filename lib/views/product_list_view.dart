@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/model/product.dart';
+import 'package:flutter_application_1/services/query/product.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-String productsGraphQL = """
-query products {
-  products(first: 10, channel: "default-channel") {
-    edges {
-      node {
-        id
-        name
-        description
-        thumbnail {
-          url
-        }
-      }
-    }
-  }
-}
-""";
-
-class ProductList extends StatelessWidget {
+class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
+
+  @override
+  State<ProductList> createState() => _ProductListState();
+}
+
+class _ProductListState extends State<ProductList> {
+  List<Product> products = <Product>[];
+  final Queries _query = Queries();
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +30,9 @@ class ProductList extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(32, 24, 32, 0),
         child: Query(
           options: QueryOptions(
-            document: gql(productsGraphQL),
+            document: gql(_query.fetchAllProducts()),
           ),
-          builder: (QueryResult result, {fetchMore, refetch}) {
+          builder: (QueryResult result, {refetch, fetchMore}) {
             if (result.hasException) {
               return Text(result.exception.toString());
             }
@@ -50,13 +43,23 @@ class ProductList extends StatelessWidget {
               );
             }
 
-            final productList = result.data?['products']['edges'];
+            // final productList = Product.getProduct(result.data?['products']['edges']);
+            // setState(() {
+            for (var i = 0; i < result.data?["products"].length; i++) {
+              products.add(Product(
+                id: result.data?["products"]['edges'][i]["node"]["id"],
+                name: result.data?["products"]['edges'][i]["node"]["name"],
+                price: "Rp 300.000",
+              ));
+            }
+            // });
+
             return Column(
               children: <Widget>[
                 title,
                 Expanded(
                   child: GridView.builder(
-                    itemCount: productList.length,
+                    itemCount: products.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -65,7 +68,6 @@ class ProductList extends StatelessWidget {
                       childAspectRatio: 0.75,
                     ),
                     itemBuilder: (_, index) {
-                      var product = productList[index]['node'];
                       return Container(
                         decoration: BoxDecoration(
                           border: Border.all(width: 1, color: Colors.black),
@@ -76,13 +78,13 @@ class ProductList extends StatelessWidget {
                           height: 180,
                           child: Column(
                             children: [
-                              Image.network(product['thumbnail']['url']),
+                              // Image.network(product['thumbnail']['url']),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 8.0,
                                 ),
                                 child: Text(
-                                  product['name'],
+                                  products[index].getName(),
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
