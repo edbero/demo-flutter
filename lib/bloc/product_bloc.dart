@@ -1,6 +1,6 @@
 import 'package:flutter_application_1/bloc/repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_application_1/bloc/products.dart';
+import 'package:flutter_application_1/bloc/product_bucket.dart';
 
 class ProductBloc extends Bloc<ProductEvents, ProductStates> {
   final Repository repository;
@@ -12,10 +12,13 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
   Stream<ProductStates> mapEventToState(
     ProductEvents event,
   ) async* {
-    if (event is ProductEvents) {
+    if (event is ProductLoadEvent) {
+      final query = event.query;
+      final variables = event.variables;
+
       try {
         yield ProductLoadingState();
-        final results = await repository.getAllProducts();
+        final results = await repository.getAllProducts(query, variables);
 
         yield ProductLoadedState(
           products: results,

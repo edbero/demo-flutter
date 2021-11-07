@@ -1,15 +1,13 @@
 import 'package:flutter_application_1/model/product.dart';
 import 'package:flutter_application_1/services/config.dart';
-import 'package:flutter_application_1/services/query/product_query.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class Repository {
-  final GraphQLClient _client = clientToQuery();
+  final GraphQLService _client = GraphQLService();
 
-  Future<List<Product>> getAllProducts() async {
-    QueryResult result = await _client.query(QueryOptions(
-      document: gql(getAllProductsQuery),
-    ));
+  Future<List<Product>> getAllProducts(query, variables) async {
+    QueryResult result =
+        await _client.performMutation(query, variables: variables);
 
     if (result.hasException) {
       return [];

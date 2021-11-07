@@ -1,4 +1,4 @@
-const getAllProductsQuery = '''
+String getAllProductsQuery = '''
   query products {
     products(first: 10, channel: "default-channel") {
       edges {
@@ -10,6 +10,22 @@ const getAllProductsQuery = '''
             url
           }
         }
+      }
+    }
+  }
+''';
+
+String test = '''
+  query projects {
+    projects{
+      id
+      name
+      type
+      description
+      categories{name}
+      owner{
+        name
+        icon_image
       }
     }
   }

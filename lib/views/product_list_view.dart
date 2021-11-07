@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/bloc/products.dart';
+import 'package:flutter_application_1/bloc/product_bucket.dart';
 import 'package:flutter_application_1/bloc/repository.dart';
+import 'package:flutter_application_1/services/query/product_query.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductList extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ProductListState extends State<ProductList> {
       body: BlocProvider(
         create: (context) => ProductBloc(
           repository: repository,
-        )..add(ProductEvents()),
+        )..add(ProductLoadEvent(test, const {})),
         child: BlocBuilder<ProductBloc, ProductStates>(
           builder: (context, state) {
             if (state is ProductLoadingState) {
