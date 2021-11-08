@@ -1,9 +1,16 @@
-class Product {
-  final String id;
-  final String name;
-  final String price;
+import 'package:objectbox/objectbox.dart';
 
-  Product({required this.id, required this.name, required this.price});
+@Entity()
+class Product {
+  int id;
+  int price;
+  String name;
+
+  Product({
+    this.id = 0,
+    required this.price,
+    required this.name,
+  });
 
   getId() => id;
   getName() => name;

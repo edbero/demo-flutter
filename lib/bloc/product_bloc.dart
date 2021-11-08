@@ -13,6 +13,7 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
     ProductEvents event,
   ) async* {
     if (event is ProductLoadEvent) {
+      print(event);
       final query = event.query;
       final variables = event.variables;
 
@@ -24,6 +25,8 @@ class ProductBloc extends Bloc<ProductEvents, ProductStates> {
           products: results,
         );
       } catch (error) {
+        print("ini error");
+        print(error);
         yield ProductErrorState();
       }
     }

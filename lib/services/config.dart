@@ -1,7 +1,7 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-// final HttpLink httpLink = HttpLink("https://demo.saleor.io/graphql/");
-final HttpLink httpLink = HttpLink("http://34.101.91.161/graphql");
+final HttpLink httpLink = HttpLink("https://demo.saleor.io/graphql/");
+// final HttpLink httpLink = HttpLink("http://34.101.91.161/graphql");
 
 class GraphQLService {
   final GraphQLClient _client = GraphQLClient(

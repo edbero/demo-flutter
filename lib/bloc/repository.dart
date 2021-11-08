@@ -12,13 +12,15 @@ class Repository {
     if (result.hasException) {
       return [];
     } else {
+      print("resultt");
+      print(result.data);
       List data = result.data!["products"]["edges"];
       List<Product> products = [];
       for (var e in data) {
         products.add(Product(
           id: e['node']['id'],
           name: e['node']['name'],
-          price: '100000',
+          price: 10000,
         ));
       }
 
